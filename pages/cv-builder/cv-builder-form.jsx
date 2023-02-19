@@ -22,6 +22,7 @@ const CVBuilderForm = () => {
     const [experienceStatus, setExperienceStatus] = React.useState(true);
     const [levelOfEducationStatus, setLevelOfEducationStatus] = React.useState('high-school');
     const [graduatedStatus, setGraduatedStatus] = React.useState('enroll');
+    const [addWorkExperienceStatus, setAddWorkExperienceStatus] = React.useState(true);
     const isStepOptional = (step) => {
         return step === 1;
     };
@@ -39,6 +40,47 @@ const CVBuilderForm = () => {
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
+    };
+
+    const handleExperienceNext = () => {
+        let newSkipped = skipped;
+        if (isStepSkipped(activeStep)) {
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+        }
+
+        if (localStorage.addWorkExperience) {
+            const workExperience = JSON.parse(localStorage.getItem('addWorkExperience'));
+            if (workExperience == 'yes') {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                setSkipped(newSkipped);
+            } else if (workExperience == 'no') {
+                setActiveStep((prevActiveStep) => prevActiveStep + 2);
+                setSkipped(newSkipped);
+
+            } else {
+                alert('Please, select one');
+            }
+        }
+    };
+
+    const handleNextExperienceForm = () => {
+        let newSkipped = skipped;
+        if (isStepSkipped(activeStep)) {
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+        }
+
+        if (localStorage.levelOfEducation) {
+            const educationLevel = JSON.parse(localStorage.getItem('levelOfEducation'));
+            if (educationLevel == 'college-university') {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                setSkipped(newSkipped);
+            } else {
+                setActiveStep((prevActiveStep) => prevActiveStep + 2);
+                setSkipped(newSkipped);
+            }
+        }
     };
 
     const handleBack = () => {
@@ -85,6 +127,16 @@ const CVBuilderForm = () => {
     const graduated = (text) => {
         localStorage.setItem('graduated', JSON.stringify(text));
         setGraduatedStatus(text);
+    }
+
+    const addWorkExperience = (text) => {
+        localStorage.removeItem('addWorkExperience');
+        localStorage.setItem('addWorkExperience', JSON.stringify(text));
+        if (text == 'yes') {
+            setAddWorkExperienceStatus(true);
+        } else {
+            setAddWorkExperienceStatus(false);
+        }
     }
 
 
@@ -428,20 +480,41 @@ const CVBuilderForm = () => {
                                             <h2 className='text-[40px] leading-tight text-[#4A4A4A] font-semibold w-3/4'>Would you like to add a Work Experience section?</h2>
                                             <small className='text-[#9898A5] text-sm'>Work experience can include duties performed during unofficial jobs, internships, extracurricular activities, or relevant hobbies.</small>
                                         </div>
-                                        <div className='flex gap-3 px-10'>
-                                            <div className='rounded cursor-pointer w-36 border-2 border-blue-400 h-36 flex flex-col justify-center text-center items-center gap-16 text-blue-400 shadow-lg'>
-                                                <div className="relative">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="28" viewBox="0 0 38 28" className='absolute top-5 -left-5'><path fill='#60A5FA' fillRule="nonzero" d="M37.443.558a1.895 1.895 0 0 0-2.687 0l-22.763 22.84-8.75-8.78a1.896 1.896 0 0 0-2.686 0 1.91 1.91 0 0 0 0 2.697L10.65 27.442a1.896 1.896 0 0 0 2.687 0L37.443 3.254a1.91 1.91 0 0 0 0-2.696z"></path></svg>
+                                        {addWorkExperienceStatus &&
+                                            <div className='flex gap-3 px-10'>
+                                                <div onClick={() => addWorkExperience('yes')} className='rounded cursor-pointer w-36 border-2 border-blue-400 h-36 flex flex-col justify-center text-center items-center gap-16 text-blue-400 shadow-lg'>
+                                                    <div className="relative">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="28" viewBox="0 0 38 28" className='absolute top-5 -left-5'><path fill='#60A5FA' fillRule="nonzero" d="M37.443.558a1.895 1.895 0 0 0-2.687 0l-22.763 22.84-8.75-8.78a1.896 1.896 0 0 0-2.686 0 1.91 1.91 0 0 0 0 2.697L10.65 27.442a1.896 1.896 0 0 0 2.687 0L37.443 3.254a1.91 1.91 0 0 0 0-2.696z"></path></svg>
+                                                    </div>
+                                                    <span className='text-sm'>Yes</span>
                                                 </div>
-                                                <span className='text-sm'>Yes</span>
-                                            </div>
-                                            <div className='rounded cursor-pointer w-36 border-2 border-[#ddd] transition-all ease-in duration-300 hover:border-blue-400 h-36 flex flex-col justify-center text-center items-center gap-16 text-gray-400 shadow-lg'>
-                                                <div className="relative">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" className='absolute top-5 -left-4'><path fill='#606060' fillRule="nonzero" d="M16.084 14L27.568 2.516A1.474 1.474 0 0 0 25.484.432L14 11.916 2.516.432A1.474 1.474 0 1 0 .432 2.516L11.916 14 .432 25.484a1.474 1.474 0 1 0 2.084 2.084L14 16.084l11.484 11.484a1.474 1.474 0 0 0 2.084-2.084L16.084 14z"></path></svg>
+                                                <div onClick={() => addWorkExperience('no')} className='rounded cursor-pointer w-36 border-2 border-[#ddd] transition-all ease-in duration-300 hover:border-blue-400 h-36 flex flex-col justify-center text-center items-center gap-16 text-gray-400 shadow-lg'>
+                                                    <div className="relative">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" className='absolute top-5 -left-4'><path fill='#606060' fillRule="nonzero" d="M16.084 14L27.568 2.516A1.474 1.474 0 0 0 25.484.432L14 11.916 2.516.432A1.474 1.474 0 1 0 .432 2.516L11.916 14 .432 25.484a1.474 1.474 0 1 0 2.084 2.084L14 16.084l11.484 11.484a1.474 1.474 0 0 0 2.084-2.084L16.084 14z"></path></svg>
+                                                    </div>
+                                                    <span className='text-sm'>No</span>
                                                 </div>
-                                                <span className='text-sm'>No</span>
                                             </div>
-                                        </div>
+                                        }
+
+                                        {!addWorkExperienceStatus &&
+                                            <div className='flex gap-3 px-10'>
+                                                <div onClick={() => addWorkExperience('yes')} className='rounded cursor-pointer w-36 border-2 border-[#ddd] h-36 flex flex-col justify-center text-center items-center gap-16 text-gray-400 shadow-lg'>
+                                                    <div className="relative">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="28" viewBox="0 0 38 28" className='absolute top-5 -left-5'><path fill='#606060' fillRule="nonzero" d="M37.443.558a1.895 1.895 0 0 0-2.687 0l-22.763 22.84-8.75-8.78a1.896 1.896 0 0 0-2.686 0 1.91 1.91 0 0 0 0 2.697L10.65 27.442a1.896 1.896 0 0 0 2.687 0L37.443 3.254a1.91 1.91 0 0 0 0-2.696z"></path></svg>
+                                                    </div>
+                                                    <span className='text-sm'>Yes</span>
+                                                </div>
+                                                <div onClick={() => addWorkExperience('no')} className='rounded cursor-pointer w-36 border-2 border-blue-400 transition-all ease-in duration-300 hover:border-blue-400 h-36 flex flex-col justify-center text-center items-center gap-16 text-blue-400 shadow-lg'>
+                                                    <div className="relative">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" className='absolute top-5 -left-4'><path fill='#60A5FA' fillRule="nonzero" d="M16.084 14L27.568 2.516A1.474 1.474 0 0 0 25.484.432L14 11.916 2.516.432A1.474 1.474 0 1 0 .432 2.516L11.916 14 .432 25.484a1.474 1.474 0 1 0 2.084 2.084L14 16.084l11.484 11.484a1.474 1.474 0 0 0 2.084-2.084L16.084 14z"></path></svg>
+                                                    </div>
+                                                    <span className='text-sm'>No</span>
+                                                </div>
+                                            </div>
+                                        }
+
+
                                     </div>
                                     <div className='hidden md:flex w-7/12'>
                                         <Image src={'/questionaire-first.svg'} width={500} height={500} alt='Questionaire-image' />
@@ -463,7 +536,7 @@ const CVBuilderForm = () => {
                                         </Button>
                                     )}
 
-                                    <Button onClick={handleNext}>
+                                    <Button onClick={handleExperienceNext}>
                                         {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                     </Button>
                                 </Box>
@@ -473,7 +546,7 @@ const CVBuilderForm = () => {
                         {activeStep + 1 == 6 &&
                             <div className='mb-1'>
                                 <div className='max-w-7xl h-auto rounded-md shadow-md bg-slate-100 px-16 py-10 flex flex-col gap-6'>
-                                    <ExperienceForm handleNext={handleNext} />
+                                    <ExperienceForm handleNext={handleNextExperienceForm} />
                                     <div className='flex gap-2'>
                                         <Button className='border-3 border-gray-600 rounded-xl px-8 py-3'
                                             color="inherit"
