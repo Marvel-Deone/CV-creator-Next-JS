@@ -5,15 +5,15 @@ import React, { useState } from 'react';
 const CareerForm = () => {
     const [carrerObjective, setCarrerObjective] = useState('');
     const [allCareerObjective, setAllCareerObjective] = useState([]);
-    const [suggestedCareerObjectives, setSuggestedCareerObjectives] = useState(['Time Management',
-        'Dedicated worker with excellent communication, time management and computer skills. Aiming to leverage my abilities to successfully fill the vacancy at your company. Frequently praised as hardworking by my peers, I can be relied upon to help your company achieve its goals.',
-        'Responsible student with good judgment, time management and a flexible schedule. Aiming to leverage my abilities to successfully fill the vacancy at your company. Frequently praised as hardworking by my peers, I can be relied upon to help your company achieve its goals.',
-        'Dedicated professional with proven performance in management, leadership and communication. Detail-oriented in problem-solving and planning. Ready to make an immediate contribution to your organization.',
-        'Adaptable professional with [Number] years of work experience and proven knowledge of leadership, problem-solving, and workflow prioritization. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
-        'Results-oriented professional with [Number] years of experience and a proven knowledge of [Skill], [Skill] and [Skill]. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
-        'Hard worker experienced in problem-solving, service and time management. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
-        'Hard worker experienced in problem-solving, service and time management. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
-        'Current student looking to join the workforce to gain real-world experience. Ability to complete tasks on time in both individual and team settings. Dependable and reliable, ready to learn and grow with your company.',
+    const [suggestedCareerObjectives, setSuggestedCareerObjectives] = useState([' Time Management',
+        ' Dedicated worker with excellent communication, time management and computer skills. Aiming to leverage my abilities to successfully fill the vacancy at your company. Frequently praised as hardworking by my peers, I can be relied upon to help your company achieve its goals.',
+        ' Responsible student with good judgment, time management and a flexible schedule. Aiming to leverage my abilities to successfully fill the vacancy at your company. Frequently praised as hardworking by my peers, I can be relied upon to help your company achieve its goals.',
+        ' Dedicated professional with proven performance in management, leadership and communication. Detail-oriented in problem-solving and planning. Ready to make an immediate contribution to your organization.',
+        ' Adaptable professional with [Number] years of work experience and proven knowledge of leadership, problem-solving, and workflow prioritization. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
+        ' Results-oriented professional with [Number] years of experience and a proven knowledge of [Skill], [Skill] and [Skill]. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
+        ' Hard worker experienced in problem-solving, service and time management. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
+        ' Hard worker experienced in problem-solving, service and time management. Aiming to leverage my abilities to successfully fill the [Job Title] role at your company.',
+        ' Current student looking to join the workforce to gain real-world experience. Ability to complete tasks on time in both individual and team settings. Dependable and reliable, ready to learn and grow with your company.',
 
     ]);
 
@@ -31,7 +31,6 @@ const CareerForm = () => {
                 <h2 className='text-[35px] leading-tight text-[#4A4A4A] font-semibold w-3/4'>Career Objective</h2>
                 <small className='text-[#9898A5] text-sm'>This section will usually be one of the first things a hiring manager reads. It tells them, “Here's who I am, and here's what I can do for your company”.</small>
             </div>
-            <input type="text" placeholder='dhhdh' />
             <div className='flex gap-10 ml-20'>
                 <textarea type="text" className='w-5/12 overflow-x-hidden overflow-y-auto px-5 py-14 outline-none rounded border border-gray-300 text-gray-600' style={{ wordBreak: 'break-word' }} value={carrerObjective} onChange={e => setCarrerObjective(e.target.value)} placeholder='Write your career objective here or select one of our pre-written xamples to start with.' />
 
@@ -48,7 +47,7 @@ const CareerForm = () => {
                         <div className='flex flex-col overflow-y-auto'>
                             {suggestedCareerObjectives.map((suggestedCareerObjective, i) => (
                                 <div onClick={() => {
-                                    setCarrerObjective(suggestedCareerObjective);
+                                    setCarrerObjective(e => ([...e, suggestedCareerObjective]));
                                 }} key={i} className='border border-gray-300 rounded shadow-md bg-white px-6 py-4 cursor-pointer mb-3'><span className='font-semibold text-2xl mr-3'>+</span>{suggestedCareerObjective}</div>
                             ))}
                         </div>
