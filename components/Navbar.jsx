@@ -12,7 +12,7 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round"
                                 d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        <span className="text-2xl font-semibold cursor-pointer">CV Creator</span>
+                        <Link href="/" className="text-2xl font-semibold cursor-pointer">CV Creator</Link>
                     </a>
                     <div className="flex gap-3 items-center">
                         {/* <Link href='/' className="text-gray-500 transition-all ease-in hover:text-blue-700 px-1 py-5 cursor-pointer">Home</Link> */}

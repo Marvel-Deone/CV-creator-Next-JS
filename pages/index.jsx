@@ -11,7 +11,7 @@ const Home = () => {
           <h1 className="w-full md:w-[28rem] font-sans text-4xl lg:text-[3rem] font-semibold text-[#1E304A] leading-[3.75rem]">
             Boost your chances of landing that dream job
           </h1>
-          <button class="bg-blue-700 text-white py-3 md:px-5 px-8 w-40 rounded mb-3 hover:bg-blue-600 transition-all ease-in duration-300"><Link href="/cv-builder">Create CV Now</Link></button>
+          <button className="bg-blue-700 text-white py-3 md:px-5 px-8 w-40 rounded mb-3 hover:bg-blue-600 transition-all ease-in duration-300"><Link href="/cv-builder">Create CV Now</Link></button>
         </div>
         <div className='hidden md:flex w-5/12 lg:w-6/12 md:mt-28'>
           <Image src={'/creator.svg'} width={700} height={700} alt='hero-section' />
