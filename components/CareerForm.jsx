@@ -18,9 +18,6 @@ const CareerForm = ({ finish }) => {
     ]);
 
     const addCareerObjective = () => {
-        // setAllCareerObjective(e => ([...e, {
-        //     careerObjective
-        // }]));
         let cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
         cvInfo.careerObjectiveInfo = carrerObjective;
         localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
@@ -36,7 +33,6 @@ const CareerForm = ({ finish }) => {
                 <textarea type="text" className='w-5/12 overflow-x-hidden overflow-y-auto px-5 py-14 outline-none rounded border border-gray-300 text-gray-600' style={{ wordBreak: 'break-word' }} value={carrerObjective} onChange={e => setCarrerObjective(e.target.value.replaceAll(',', ''))} placeholder='Write your career objective here or select one of our pre-written xamples to start with.' />
 
                 <div className='w-5/12 h-[30rem] border border-gray-300 rounded flex flex-col gap-6'>
-                    {/* <div className='w-6/12 h-4/6 border border-gray-300 rounded flex flex-col gap-6'> */}
                     <div className='rounded bg-white border border-gray-300 text-gray-300 flex justify-between px-4'>
                         <input type="text" placeholder='Search' className='outline-none focus:outline-none px-1 py-3' />
                         <div className="flex items-center cursor-pointer">
@@ -56,23 +52,6 @@ const CareerForm = ({ finish }) => {
                     <div className='mt-2 cursor-pointer' onClick={addCareerObjective}>
                         <button name="submit" className='cursor-pointer w-48 bg-blue-400 transition-all ease-in-out duration-300 hover:bg-blue-500 hover:text-white text-white rounded-xl px-8 py-3'>Finish</button>
                     </div>
-                    {/* </div> */}
-                    {/* <div className='rounded bg-white border border-gray-300 text-gray-300 flex justify-between px-4'>
-                        <input type="text" placeholder='Search' className='outline-none focus:outline-none px-1 py-3' />
-                        <div className="flex items-center cursor-pointer">
-                            <Image className='' src={'/search.png'} width={20} height={20} alt='Questionaire-image' />
-                        </div>
-                    </div> */}
-                    {/* <div className='px-5 text-gray-500 flex flex-col gap-2'>
-                        <p>Pre Written Examples</p> */}
-                    {/* <div className='flex flex-col overflow-y-auto'>
-                            {suggestedCareerObjective.map((suggestedObjective, i) => (
-                                <div onClick={() => {
-                                    setCarrerObjective(suggestedObjective);
-                                }} key={i} className='border border-gray-300 rounded shadow-md bg-white px-6 py-4 cursor-pointer mb-3'><span className='font-semibold text-2xl mr-3'>+</span>{suggestedObjective}</div>
-                            ))}
-                        </div> */}
-                    {/* </div> */}
                 </div>
             </div>
         </div>

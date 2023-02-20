@@ -8,56 +8,12 @@ const CVViewer = () => {
     useEffect(() => {
         if (localStorage.userCVInfo) {
             let allUserCVInfo = JSON.parse(localStorage.getItem('userCVInfo'));
-            console.log('allUserCVInfo', allUserCVInfo);
             setUserCvInfo(allUserCVInfo);
             setSkillsInfo(allUserCVInfo.skillsInfo);
             let careerObjective = allUserCVInfo.careerObjectiveInfo;
             setCareerNote(careerObjective);
         }
     });
-    // console.log('skillsInfo', skillsInfo);
-
-    // for (let i = 0; i < careerObjective.length; i++) {
-    //     element = careerObjective[i];
-    // }
-    // setCareerNote(element);
-    // const [careerObjectiveInfo, setCareerObjectiveInfo] = useState(null);
-    // const [educationInfo, setEducationInfo] = useState(null);
-    // const [skillsInfo, setSkillsInfo] = useState(null);
-    // const [experienceInfo, setExperienceInfo] = useState(null);
-    // useEffect(() => {
-    //     if (localStorage.CVContactInfo) {
-    //         setContactInfo(JSON.parse(localStorage.getItem('CVContactInfo')));
-    //     }
-    //     // if (localStorage.CVExperienceInfo) {
-    //     //     setExperienceInfo(JSON.parse(localStorage.getItem('CVExperienceInfo')));
-    //     // }
-    //     // if (localStorage.CVEducationInfo) {
-    //     //     setEducationInfo(JSON.parse(localStorage.getItem('CVEducationInfo')));
-    //     // }
-    //     // if (localStorage.SKills) {
-    //     //     setSkillsInfo(JSON.parse(localStorage.getItem('Skills')));
-    //     // }
-
-    //     // if (localStorage.careerObjective) {
-    //     //     setCareerObjectiveInfo(JSON.parse(localStorage.getItem('careerObjective')));
-    //     // }
-    // });
-    // console.log(contactInfo);
-    // console.log(experienceInfo);
-    // console.log(educationInfo);
-    // console.log(skillsInfo);
-    // console.log('careerObjective', careerObjectiveInfo);
-    // setSkillsInfo(localStorage.getItem('Skills'));
-    // console.log('skillsInfo', skillsInfo);
-    // if (localStorage.Skills) {
-    //     const userSkills = JSON.parse(localStorage.getItem('Skills'));
-    //     console.log('userSkills', userSkills);
-    // }
-
-
-
-    // const [city, setCity] = useState(cont)
     return (
         <>
             <div className='max-w-4xl print:max-w-full print:mx-0 mx-auto flex print:pt-20 pt-16 overflow-y-auto'>
@@ -136,7 +92,6 @@ const CVViewer = () => {
                                     )
                                 })
                                 }
-                                {/* <p className='print:text-sm text-[10px]'>Motivated Care Assistant with 10 years of experience in the Care industry. Offering expertise in person-centred care, implementation and monitoring of individual care plans and management of resident assessments and files. Energetic self-starter and team builder able to navigate high-stress situations. Well-versed in monitoring clients with developmental disabilities and adhering to patient care plans.</p> */}
                             </div>
                             <hr />
                             <div className='flex flex-col gap-1'>
