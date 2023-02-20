@@ -16,7 +16,9 @@ const CVForm = ({ handleNext }) => {
         zipCode: ''
     }
     const onSubmit = (values, { resetForm }) => {
-        localStorage.setItem('CVContactInfo', JSON.stringify(values));
+        let cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        cvInfo.contactInfo = values;
+        localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
         // resetForm();
         handleNext();
     }

@@ -49,18 +49,17 @@ const CVBuilderForm = () => {
             newSkipped.delete(activeStep);
         }
 
-        if (localStorage.addWorkExperience) {
-            const workExperience = JSON.parse(localStorage.getItem('addWorkExperience'));
-            if (workExperience == 'yes') {
-                setActiveStep((prevActiveStep) => prevActiveStep + 1);
-                setSkipped(newSkipped);
-            } else if (workExperience == 'no') {
-                setActiveStep((prevActiveStep) => prevActiveStep + 2);
-                setSkipped(newSkipped);
+        const cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        const workExperience = cvInfo.addWorkExperience;
 
-            } else {
-                alert('Please, select one');
-            }
+        if (workExperience == 'yes') {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            setSkipped(newSkipped);
+        } else if (workExperience == 'no') {
+            setActiveStep((prevActiveStep) => prevActiveStep + 2);
+            setSkipped(newSkipped);
+        } else {
+            alert('Please, select one');
         }
     };
 
@@ -71,15 +70,14 @@ const CVBuilderForm = () => {
             newSkipped.delete(activeStep);
         }
 
-        if (localStorage.levelOfEducation) {
-            const educationLevel = JSON.parse(localStorage.getItem('levelOfEducation'));
-            if (educationLevel == 'college-university') {
-                setActiveStep((prevActiveStep) => prevActiveStep + 1);
-                setSkipped(newSkipped);
-            } else {
-                setActiveStep((prevActiveStep) => prevActiveStep + 2);
-                setSkipped(newSkipped);
-            }
+        const cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        const educationLevel = cvInfo.levelOfEducation;
+        if (educationLevel == 'college-university') {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            setSkipped(newSkipped);
+        } else {
+            setActiveStep((prevActiveStep) => prevActiveStep + 2);
+            setSkipped(newSkipped);
         }
     };
 
@@ -111,7 +109,21 @@ const CVBuilderForm = () => {
     }
 
     const haveExperience = (text) => {
-        localStorage.setItem('haveExperience', JSON.stringify(text));
+        const cvInfo = {
+            graduated: null,
+            haveExperience: text,
+            levelOfEducation: null,
+            contactInfo: null,
+            addWorkExperience: null,
+            careerObjectiveInfo: null,
+            educationInfo: null,
+            skillsInfo: null,
+            experienceInfo: null
+        };
+        localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
+        // const cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        // console.log('cvInfo', cvInfo);
+        // localStorage.setItem('haveExperience', JSON.stringify(text));
         if (text == 'yes') {
             setExperienceStatus(true);
         } else {
@@ -120,18 +132,23 @@ const CVBuilderForm = () => {
     }
 
     const levelOfEducation = (text) => {
-        localStorage.setItem('levelOfEducation', JSON.stringify(text));
+        let cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        cvInfo.levelOfEducation = text;
         setLevelOfEducationStatus(text);
+        localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
     }
 
     const graduated = (text) => {
-        localStorage.setItem('graduated', JSON.stringify(text));
+        let cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        cvInfo.graduated = text;
         setGraduatedStatus(text);
+        localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
     }
 
     const addWorkExperience = (text) => {
-        localStorage.removeItem('addWorkExperience');
-        localStorage.setItem('addWorkExperience', JSON.stringify(text));
+        let cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        cvInfo.addWorkExperience = text;
+        localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
         if (text == 'yes') {
             setAddWorkExperienceStatus(true);
         } else {
@@ -616,7 +633,7 @@ const CVBuilderForm = () => {
                         {activeStep + 1 == 9 &&
                             <div className='mb-1'>
                                 <div className='max-w-7xl h-auto rounded-md shadow-md bg-slate-100 px-16 py-10 flex flex-col gap-6'>
-                                    <CareerForm />
+                                    <CareerForm finish={finish} />
                                     <div className='flex gap-2 md:mx-32'>
                                         <Button className='bg-gray-300 border-3 border-gray-600 rounded-xl px-8 py-3 w-44'
                                             color="inherit"
@@ -632,9 +649,9 @@ const CVBuilderForm = () => {
                                             </Button>
                                         )}
 
-                                        <Button onClick={finish} className='bg-blue-400 hover:bg-blue-500 hover:text-white text-white rounded-xl px-8 py-3 w-44'>
+                                        {/* <Button onClick={finish} className='bg-blue-400 hover:bg-blue-500 hover:text-white text-white rounded-xl px-8 py-3 w-44'>
                                             Finish
-                                        </Button>
+                                        </Button> */}
                                     </div>
                                 </div>
                             </div>

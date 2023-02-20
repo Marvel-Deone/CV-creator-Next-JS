@@ -2,10 +2,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-const CareerForm = () => {
+const CareerForm = ({ finish }) => {
     const [carrerObjective, setCarrerObjective] = useState('');
     const [allCareerObjective, setAllCareerObjective] = useState([]);
-    const [suggestedCareerObjectives, setSuggestedCareerObjectives] = useState([' Time Management',
+    const [suggestedCareerObjectives, setSuggestedCareerObjectives] = useState([' Time Management.',
         ' Dedicated worker with excellent communication, time management and computer skills. Aiming to leverage my abilities to successfully fill the vacancy at your company. Frequently praised as hardworking by my peers, I can be relied upon to help your company achieve its goals.',
         ' Responsible student with good judgment, time management and a flexible schedule. Aiming to leverage my abilities to successfully fill the vacancy at your company. Frequently praised as hardworking by my peers, I can be relied upon to help your company achieve its goals.',
         ' Dedicated professional with proven performance in management, leadership and communication. Detail-oriented in problem-solving and planning. Ready to make an immediate contribution to your organization.',
@@ -18,12 +18,13 @@ const CareerForm = () => {
     ]);
 
     const addCareerObjective = () => {
-        setAllCareerObjective(e => ([...e, {
-            careerObjectiveId: Math.floor(Math.random() * 1000000000),
-            careerObjective
-        }]));
-        localStorage.setItem('CareerObjective', JSON.stringify(allCareerObjective));
-        handleNext();
+        // setAllCareerObjective(e => ([...e, {
+        //     careerObjective
+        // }]));
+        let cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        cvInfo.careerObjectiveInfo = carrerObjective;
+        localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
+        finish();
     }
     return (
         <div className='flex flex-col gap-8'>
@@ -32,7 +33,7 @@ const CareerForm = () => {
                 <small className='text-[#9898A5] text-sm'>This section will usually be one of the first things a hiring manager reads. It tells them, “Here's who I am, and here's what I can do for your company”.</small>
             </div>
             <div className='flex gap-10 ml-20'>
-                <textarea type="text" className='w-5/12 overflow-x-hidden overflow-y-auto px-5 py-14 outline-none rounded border border-gray-300 text-gray-600' style={{ wordBreak: 'break-word' }} value={carrerObjective} onChange={e => setCarrerObjective(e.target.value)} placeholder='Write your career objective here or select one of our pre-written xamples to start with.' />
+                <textarea type="text" className='w-5/12 overflow-x-hidden overflow-y-auto px-5 py-14 outline-none rounded border border-gray-300 text-gray-600' style={{ wordBreak: 'break-word' }} value={carrerObjective} onChange={e => setCarrerObjective(e.target.value.replaceAll(',', ''))} placeholder='Write your career objective here or select one of our pre-written xamples to start with.' />
 
                 <div className='w-5/12 h-[30rem] border border-gray-300 rounded flex flex-col gap-6'>
                     {/* <div className='w-6/12 h-4/6 border border-gray-300 rounded flex flex-col gap-6'> */}
@@ -51,6 +52,9 @@ const CareerForm = () => {
                                 }} key={i} className='border border-gray-300 rounded shadow-md bg-white px-6 py-4 cursor-pointer mb-3'><span className='font-semibold text-2xl mr-3'>+</span>{suggestedCareerObjective}</div>
                             ))}
                         </div>
+                    </div>
+                    <div className='mt-2 cursor-pointer' onClick={addCareerObjective}>
+                        <button name="submit" className='cursor-pointer w-48 bg-blue-400 transition-all ease-in-out duration-300 hover:bg-blue-500 hover:text-white text-white rounded-xl px-8 py-3'>Finish</button>
                     </div>
                     {/* </div> */}
                     {/* <div className='rounded bg-white border border-gray-300 text-gray-300 flex justify-between px-4'>

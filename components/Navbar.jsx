@@ -28,11 +28,13 @@ const Navbar = () => {
             <nav className="flex justify-between lg:hidden shadow fixed top-0 w-full items-center p-4 bg-[#F8FAFB]">
                 <div>
                     <div className="flex text-gray-700 items-center font-serif">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1 text-blue-800" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
+                        <Link href="/">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1 text-blue-800" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </Link>
                         {/* <link href="/" className="text-xl font-semibold">FMark Bank</link> */}
                     </div>
                 </div>
@@ -41,7 +43,7 @@ const Navbar = () => {
 
 
 
-                <div className="absolute top-0 h-screen left-0 flex w-full bg-black/50">
+                {/* <div className="absolute top-0 h-screen left-0 flex w-full bg-black/50">
                     <div className="w-9/12 bg-white p-5 h-full flex flex-col gap-4">
                         <div>
                             <a className="flex gap-2 text-gray-700 items-center font-serif">
@@ -80,7 +82,7 @@ const Navbar = () => {
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </nav>
 
         </div>

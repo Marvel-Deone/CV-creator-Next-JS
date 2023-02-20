@@ -20,7 +20,9 @@ const SkillsForm = ({ handleNext }) => {
         }]));
     }
     const storeSkills = () => {
-        localStorage.setItem('Skills', JSON.stringify(allSkills));
+        let cvInfo = JSON.parse(localStorage.getItem(('userCVInfo')));
+        cvInfo.skillsInfo = allSkills
+        localStorage.setItem('userCVInfo', JSON.stringify(cvInfo));
         handleNext();
     }
     return (
